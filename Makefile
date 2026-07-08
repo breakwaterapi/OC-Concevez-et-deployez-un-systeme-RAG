@@ -34,6 +34,11 @@ format:
 	ruff check --fix
 	ruff format
 
+## Build the Faiss index (fetch + clean + chunk + embed), without starting the API
+.PHONY: build-index
+build-index:
+	$(PYTHON_INTERPRETER) scripts/build_index.py
+
 ## Set up Python interpreter environment
 .PHONY: create_environment
 create_environment:
