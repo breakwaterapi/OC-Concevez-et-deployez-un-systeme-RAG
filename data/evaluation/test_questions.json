@@ -1,0 +1,77 @@
+[
+  {
+    "question": "Le Musée de la Poste organise une animation sur le thème du temps qui passe : sur quelle période se déroule-t-elle exactement ?",
+    "reference": "L'événement se déroule au Musée de la poste (34 Boulevard de Vaugirard, 75015 Paris) du 20 septembre 2025 à 12h30 au 21 septembre 2025 à 12h30.",
+    "category": "paraphrase (vocabulaire différent)"
+  },
+  {
+    "question": "Que distribue-t-on aux enfants lors de l'ouverture exceptionnelle de la Cathédrale Notre-Dame de Paris ?",
+    "reference": "Les enfants reçoivent un feuillet adapté avec le plan de la Cathédrale comme aide à la visite et un coloriage.",
+    "category": "compréhension de texte"
+  },
+  {
+    "question": "Je souhaite observer le ciel un soir d'été dans un parc du sud de Paris : y a-t-il un coût d'entrée ou une réservation à faire ?",
+    "reference": "Non, les soirées sont gratuites et ouvertes à toutes et à tous sans inscription.",
+    "category": "paraphrase (vocabulaire différent)"
+  },
+  {
+    "question": "Quels sont les tarifs pour assister au spectacle 'Fiesta' au Théâtre de Verdure du jardin Shakespeare ?",
+    "reference": "Le tarif est de 10€ pour les adultes et de 10€ pour les enfants.",
+    "category": "extraction de tarif"
+  },
+  {
+    "question": "Quel équipement est fourni aux auditeurs lors de l'expérience sonore 'Les Sons de Voyager' ?",
+    "reference": "Les auditeurs sont équipés de casques à conduction osseuse.",
+    "category": "extraction d'entité (objet)"
+  },
+  {
+    "question": "Quel domaine spécifique est mis en lumière dans le nouvel accrochage de l'exposition 'La Mode en mouvement #3' au Palais Galliera ?",
+    "reference": "L'exposition porte un éclairage inédit sur les sports d'hiver.",
+    "category": "sémantique"
+  },
+  {
+    "question": "Qui animera la scène TWITCH lors du Festival MVP - Ma Vie Pro le 11 avril 2026 ?",
+    "reference": "La scène TWITCH sera animée par le présentateur TV Samuel Etienne.",
+    "category": "extraction de nom propre"
+  },
+  {
+    "question": "Pourquoi l'accès aux tribunes n'est-il pas permis lors de la visite de l'Église Saint-Vincent-de-Paul ?",
+    "reference": "L'accès aux tribunes n'est pas permis en raison de la restauration des peintures à la cire de Flandrin lancée par la Mairie de Paris.",
+    "category": "raisonnement (cause à effet)"
+  },
+  {
+    "question": "Le Centre Culturel Irlandais accueille en ce moment une exposition consacrée à de grands noms de la littérature : quelles sont les quatre personnalités mises en avant ?",
+    "reference": "Les quatre figures sont James Joyce, Samuel Beckett, Francis Bacon et Oscar Wilde.",
+    "category": "paraphrase (vocabulaire différent)"
+  },
+  {
+    "question": "Quelles sont les conditions (âge et tarif) pour participer à l'atelier Vannerie à Longué-Jumelles ?",
+    "reference": "L'atelier coûte 5€ la semaine et est accessible pour les jeunes âgés de 11 à 15 ans.",
+    "category": "extraction de conditions (tarif et âge)"
+  },
+  {
+    "question": "Quels sont les auteurs français mis à l'honneur lors de l'exposition 'Amitiés littéraires' au Centre Culturel Irlandais ?",
+    "reference": "Aucun auteur français n'est mis à l'honneur. L'exposition réunit des éditions autour de quatre figures irlandaises majeures : James Joyce, Samuel Beckett, Francis Bacon et Oscar Wilde.",
+    "category": "piège - fausse prémisse"
+  },
+  {
+    "question": "Quel est le montant de l'aide financière accordée par la Chambre d'agriculture pour la participation au Salon de l'Agriculture 2026 ?",
+    "reference": "Le texte ne mentionne pas le montant versé par la Chambre d'agriculture. Il indique uniquement que c'est le Conseil Départemental de Meurthe-et-Moselle qui a accordé une aide exceptionnelle de 45 000 €.",
+    "category": "piège - confusion d'entités / information absente"
+  },
+  {
+    "question": "Quels concerts de heavy metal norvégien sont prévus au Groenland ce mois-ci ?",
+    "reference": "Aucun événement de ce type n'est présent dans la base de données Open Agenda Île-de-France.",
+    "category": "piège - hors corpus"
+  },
+  {
+    "question": "Pourquoi le roi Louis XVI a-t-il ordonné la construction de la Chapelle expiatoire ?",
+    "reference": "Louis XVI n'a pas ordonné cette construction. La chapelle a été érigée plus tard (achevée en 1826) à l'emplacement où il avait été inhumé, et c'est Louis XVIII qui a fait transférer sa dépouille. C'est un monument mémoriel en son honneur.",
+    "category": "piège - anachronisme / affirmation trompeuse"
+  },
+  {
+    "question": "Combien de jours dure la visite-atelier 'Prendre la mesure du temps' au Musée de la poste ?",
+    "reference": "Elle dure exactement 24 heures (soit 1 jour). Elle commence le 20 septembre 2025 à 12:30 et se termine le 21 septembre 2025 à 12:30.",
+    "category": "piège - raisonnement temporel"
+  }
+]

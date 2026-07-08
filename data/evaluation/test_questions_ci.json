@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Où et à quelles dates se déroule la visite-atelier 'Prendre la mesure du temps' ?",
+    "reference": "L'événement se déroule au Musée de la poste (34 Boulevard de Vaugirard, 75015 Paris) du 20 septembre 2025 à 12h30 au 21 septembre 2025 à 12h30.",
+    "category": "extraction d'entité (lieu et date)"
+  },
+  {
+    "question": "Faut-il payer ou s'inscrire pour participer aux 'Nuits des étoiles au parc Montsouris' ?",
+    "reference": "Non, les soirées sont gratuites et ouvertes à toutes et à tous sans inscription.",
+    "category": "conditions d'accès"
+  },
+  {
+    "question": "Quels sont les auteurs français mis à l'honneur lors de l'exposition 'Amitiés littéraires' au Centre Culturel Irlandais ?",
+    "reference": "Aucun auteur français n'est mis à l'honneur. L'exposition réunit des éditions autour de quatre figures irlandaises majeures : James Joyce, Samuel Beckett, Francis Bacon et Oscar Wilde.",
+    "category": "piège - fausse prémisse"
+  },
+  {
+    "question": "Quels concerts de heavy metal norvégien sont prévus au Groenland ce mois-ci ?",
+    "reference": "Aucun événement de ce type n'est présent dans la base de données Open Agenda Île-de-France.",
+    "category": "piège - hors corpus"
+  }
+]

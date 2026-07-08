@@ -1,0 +1,39 @@
+site_name: Puls-Events — RAG POC
+site_description: Assistant RAG pour les événements culturels en Île-de-France (OpenClassrooms).
+site_author: LEFEVRE Kilian
+docs_dir: docs
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Passer en thème sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Passer en thème clair
+  features:
+    - navigation.sections
+    - content.code.copy
+
+nav:
+  - Accueil: index.md
+  - Démarrage: getting-started.md
+  - Architecture: architecture.md
+  - Référence API: api-reference.md
+  - Évaluation: evaluation.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight
