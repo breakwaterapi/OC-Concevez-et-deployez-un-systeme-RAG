@@ -5,6 +5,7 @@ import pytest
 
 from api.bootstrap import (
     get_data_use_cases,
+    get_documents_use_case,
     get_health_use_cases,
     get_metadata_use_cases,
     get_rag_use_case,
@@ -12,9 +13,14 @@ from api.bootstrap import (
 from api.common.domain.entities import ParentDocument
 from api.common.security import verify_rebuild_api_key
 from api.main import app
+from api.modules.documents.exceptions import DocumentNotFoundError
 from api.modules.health.use_cases import HealthStatus
 from api.modules.metadata.use_cases import IndexMetadata
 from api.modules.rag.entities import RAGResponse
+
+
+def _raise_not_found(uid: str) -> ParentDocument:
+    raise DocumentNotFoundError(uid)
 
 
 @pytest.fixture
@@ -61,9 +67,26 @@ def mock_rag_use_case():
 
 
 @pytest.fixture
+def mock_documents_use_case():
+    mock = MagicMock()
+    mock.list_documents.return_value = [
+        ParentDocument(uid="uid-1", text="Texte source."),
+        ParentDocument(uid="uid-2", text="Autre source."),
+    ]
+    mock.get_document.side_effect = lambda uid: (
+        ParentDocument(uid="uid-1", text="Texte source.")
+        if uid == "uid-1"
+        else _raise_not_found(uid)
+    )
+    mock.retrieve.return_value = [ParentDocument(uid="uid-1", text="Texte source.")]
+    return mock
+
+
+@pytest.fixture
 def client(
     monkeypatch,
     mock_rag_use_case,
+    mock_documents_use_case,
     mock_health_use_cases,
     mock_data_use_cases,
     mock_metadata_use_cases,
@@ -72,6 +95,7 @@ def client(
     monkeypatch.setattr("api.main.get_faiss_client", lambda: MagicMock(is_ready=False))
 
     app.dependency_overrides[get_rag_use_case] = lambda: mock_rag_use_case
+    app.dependency_overrides[get_documents_use_case] = lambda: mock_documents_use_case
     app.dependency_overrides[get_health_use_cases] = lambda: mock_health_use_cases
     app.dependency_overrides[get_data_use_cases] = lambda: mock_data_use_cases
     app.dependency_overrides[get_metadata_use_cases] = lambda: mock_metadata_use_cases
