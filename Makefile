@@ -54,6 +54,11 @@ test-env:
 build-index:
 	$(PYTHON_INTERPRETER) scripts/build_index.py
 
+## Serve the mkdocs documentation locally with live-reload (http://localhost:8000)
+.PHONY: docs
+docs:
+	uv run mkdocs serve
+
 ## Build Docker images
 .PHONY: docker-build
 docker-build:
