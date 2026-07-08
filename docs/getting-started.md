@@ -73,3 +73,9 @@ docs/                # Cette documentation (mkdocs)
 make test-fast    # unit + api, rapide, aucune dépendance externe
 make test-env     # suite complète incl. integration/ragas_ci, nécessite MISTRAL_API_KEY
 ```
+
+`make test-fast` calcule aussi la couverture de `src/api` : un résumé s'affiche dans le terminal, et
+un rapport HTML détaillé (ligne par ligne) est généré dans `reports/coverage_html/index.html` — à
+ouvrir directement dans un navigateur. Ce dossier est reconstruit à chaque exécution et n'est pas
+versionné (voir `.gitignore`) ; en CI, il est publié comme artefact téléchargeable du job `test`
+(onglet *Actions* du dépôt GitHub).

@@ -41,6 +41,7 @@ data/evaluation/eval_faiss_index/
 # Pytest
 .pytest_cache/
 .coverage
+reports/coverage_html/
 
 # mkdocs build output
 site/

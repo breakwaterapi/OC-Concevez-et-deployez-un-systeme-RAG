@@ -79,6 +79,9 @@ markers = [
     "ragas_ci: reduced RAGAS evaluation (4 questions) requiring MISTRAL_API_KEY, meant for CI/local smoke checks",
 ]
 
+[tool.coverage.run]
+source = ["src/api"]
+
 [tool.ruff]
 line-length = 99
 src = ["src"]

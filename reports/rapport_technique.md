@@ -277,7 +277,7 @@ l'expérimentation MLflow (section 7).
   }
   ```
 
-- **Tests effectués et documentés** : 26 tests fonctionnels sur les routes (`tests/api/`, dépendances
+- **Tests effectués et documentés** : 28 tests fonctionnels sur les routes (`tests/api/`, dépendances
   mockées, exécutés en CI) + 5 tests d'intégration contre l'API et les services réels
   (`tests/integration/`, manuels) — détail complet en section 7.4.
 
@@ -290,6 +290,7 @@ l'expérimentation MLflow (section 7).
 | 401 | Clé `X-API-Key` manquante/invalide sur `/rebuild` | "Missing or invalid X-API-Key header." |
 | 404 | Document introuvable (`/documents/{uid}`) | "Document '{uid}' not found." |
 | 503 | Index Faiss non construit (`/ask`, `/retrieve`) | "FAISS index not built yet — call /rebuild first." |
+| 503 | Open Agenda ou Mistral indisponible pendant `/rebuild` (en-tête `Retry-After: 60`) | "Open Agenda request failed during index rebuild: ..." |
 
   **Limitation connue** : `/rebuild` est protégé par une clé API partagée (comparaison en temps
   constant, `secrets.compare_digest`), pas par une authentification utilisateur individuelle —
@@ -413,13 +414,23 @@ context_entity_recall=0.379, moyenne=0.856.
 | Suite | Emplacement | Nombre | Exécution |
 |---|---|---|---|
 | Unitaires | `tests/unit/` | 80 | CI, à chaque push/PR |
-| API | `tests/api/` | 26 | CI, à chaque push/PR (routes FastAPI, dépendances mockées) |
+| API | `tests/api/` | 28 | CI, à chaque push/PR (routes FastAPI, dépendances mockées) |
 | Intégration | `tests/integration/` | 5 | Manuelle (`MISTRAL_API_KEY` + index Faiss requis) |
 | RAGAS (smoke test) | `tests/eval/` | 2 | Manuelle/CI optionnelle (`MISTRAL_API_KEY` requis) |
 
 Les tests unitaires couvrent le chunking, le client Faiss, les use cases (RAG, données, documents,
 santé, métadonnées) et la construction de la requête Open Agenda. Les tests API valident le
-comportement des routes, y compris les codes d'erreur (section 6).
+comportement des routes, y compris les codes d'erreur (section 6) et les échecs upstream
+(Open Agenda, Mistral) sur `/rebuild`.
+
+**Couverture** : `make test-fast` et le job CI `test` exécutent désormais `pytest --cov=src/api
+--cov-report=term-missing --cov-report=html:reports/coverage_html` — **90 % de lignes couvertes** sur
+`src/api` (108 tests unitaires + API). En plus du résumé terminal, un rapport HTML détaillé
+ligne-par-ligne est généré dans `reports/coverage_html/index.html` (reconstruit à chaque exécution,
+non versionné) et publié comme artefact téléchargeable du job CI `test`. Les zones les moins
+couvertes sont `bootstrap.py` (câblage des dépendances, non testé unitairement par construction) et
+`modules/data/adapters.py` (adaptateurs Faiss/LangChain, couverts indirectement par les tests
+d'intégration).
 
 ### 7.6 Démonstration
 
