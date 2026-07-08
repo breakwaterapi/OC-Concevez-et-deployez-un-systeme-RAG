@@ -34,8 +34,41 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Puls-Events RAG API",
     summary="Assistant conversationnel RAG pour les événements culturels en Île-de-France.",
+    description=(
+        "Recherche vectorielle (Faiss) sur des descriptions d'événements Open Agenda, combinée à "
+        "une génération de réponse en langage naturel (Mistral) pour répondre à des questions sur "
+        "les événements culturels à venir en Île-de-France.\n\n"
+        "Avant d'utiliser `/ask`, vérifiez `GET /health` (`store_ready: true`) — si l'index n'est "
+        "pas encore construit, appelez `POST /rebuild`. `GET /metadata` donne le détail du corpus "
+        "actuellement indexé (région, période, tailles, modèles)."
+    ),
     version="0.1.0",
     lifespan=lifespan,
+    openapi_tags=[
+        {
+            "name": "rag",
+            "description": "Poser une question et obtenir une réponse générée à partir des "
+            "événements indexés.",
+        },
+        {
+            "name": "data",
+            "description": "Construction/reconstruction de l'index vectoriel à partir d'Open "
+            "Agenda.",
+        },
+        {
+            "name": "documents",
+            "description": "Consultation directe des documents indexés, sans génération.",
+        },
+        {
+            "name": "health",
+            "description": "État de santé de l'API et de ses dépendances (Faiss, Mistral).",
+        },
+        {
+            "name": "metadata",
+            "description": "Métadonnées du corpus actuellement indexé (région, dates, tailles, "
+            "modèles).",
+        },
+    ],
 )
 
 app.add_exception_handler(DomainError, domain_error_handler)  # pyright: ignore[reportArgumentType]
