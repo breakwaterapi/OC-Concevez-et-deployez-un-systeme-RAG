@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     mistral_embed_model: str = "mistral-embed"
     mistral_chat_model: str = "mistral-small-latest"
     mistral_temperature: float = 0.3
+    mistral_timeout_s: int = 30
 
     # Chunking
     chunk_max_tokens: int = 256

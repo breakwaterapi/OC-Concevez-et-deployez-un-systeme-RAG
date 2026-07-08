@@ -9,6 +9,7 @@ class MistralLLM:
     api_key: str
     model: str = "mistral-small-latest"
     temperature: float = 0.3
+    timeout: int = 30
     chat: ChatMistralAI = field(init=False, repr=False)
 
     def __post_init__(self):
@@ -16,6 +17,7 @@ class MistralLLM:
             model=self.model,  # pyright: ignore[reportCallIssue]
             mistral_api_key=self.api_key,  # pyright: ignore[reportCallIssue]
             temperature=self.temperature,
+            timeout=self.timeout,
         )
 
     def invoke(self, system_prompt: str, user_message: str) -> str:
