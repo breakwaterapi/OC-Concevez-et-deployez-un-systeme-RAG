@@ -10,6 +10,7 @@ from api.common.logging import configure_logging
 from api.modules.data.router import router as data_router
 from api.modules.health.router import router as health_router
 from api.modules.metadata.router import router as metadata_router
+from api.modules.rag.router import router as rag_router
 
 configure_logging()
 
@@ -40,4 +41,5 @@ app.add_exception_handler(DomainError, domain_error_handler)  # pyright: ignore[
 
 app.include_router(health_router)
 app.include_router(metadata_router)
+app.include_router(rag_router)
 app.include_router(data_router)
