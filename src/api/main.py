@@ -7,6 +7,7 @@ from api.bootstrap import bootstrap, get_faiss_client
 from api.common.exceptions import DomainError
 from api.common.handlers import domain_error_handler
 from api.common.logging import configure_logging
+from api.modules.health.router import router as health_router
 
 configure_logging()
 
@@ -34,3 +35,5 @@ app = FastAPI(
 )
 
 app.add_exception_handler(DomainError, domain_error_handler)  # pyright: ignore[reportArgumentType]
+
+app.include_router(health_router)
