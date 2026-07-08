@@ -7,6 +7,7 @@ from api.infra.preprocessing.chunker import TextChunker
 from api.infra.preprocessing.cleaner import DoclingCleaner
 from api.modules.data.adapters import FAISSIndexBuilderAdapter, LangChainChunkerAdapter
 from api.modules.data.use_cases import BuildIndexUseCase, DataUseCases, PrepareDataUseCase
+from api.modules.documents.use_cases import DocumentsUseCase
 from api.modules.health.adapters import MistralModelChecker
 from api.modules.health.use_cases import HealthUseCases
 from api.modules.metadata.use_cases import MetadataUseCases
@@ -14,13 +15,15 @@ from api.modules.rag.use_cases import AskQuestionUseCase
 
 _faiss_client: FAISSClient | None = None
 _rag_use_case: AskQuestionUseCase | None = None
+_documents_use_case: DocumentsUseCase | None = None
 _health_use_cases: HealthUseCases | None = None
 _data_use_cases: DataUseCases | None = None
 _metadata_use_cases: MetadataUseCases | None = None
 
 
 def bootstrap() -> None:
-    global _faiss_client, _rag_use_case, _health_use_cases, _data_use_cases, _metadata_use_cases
+    global _faiss_client, _rag_use_case, _documents_use_case
+    global _health_use_cases, _data_use_cases, _metadata_use_cases
     s = get_settings()
 
     embedder = MistralEmbedder(api_key=s.mistral_api_key, model=s.mistral_embed_model)
@@ -44,6 +47,11 @@ def bootstrap() -> None:
         vector_store=faiss_client,
         llm=llm,
         retrieval_k=s.retrieval_k,
+    )
+
+    _documents_use_case = DocumentsUseCase(
+        store=faiss_client,
+        default_k=s.retrieval_k,
     )
 
     _health_use_cases = HealthUseCases(
@@ -96,6 +104,12 @@ def get_rag_use_case() -> AskQuestionUseCase:
     if _rag_use_case is None:
         raise RuntimeError("AskQuestionUseCase is not initialized. Call bootstrap() first.")
     return _rag_use_case
+
+
+def get_documents_use_case() -> DocumentsUseCase:
+    if _documents_use_case is None:
+        raise RuntimeError("DocumentsUseCase is not initialized. Call bootstrap() first.")
+    return _documents_use_case
 
 
 def get_health_use_cases() -> HealthUseCases:
