@@ -7,7 +7,7 @@ packages = ["src/api", "src/notebooks", "src/ui"]
 
 [project]
 name = "rag"
-version = "0.9.0"
+version = "0.9.1"
 description = "RAG system for cultural event recommendations — Puls-Events POC"
 authors = [
   { name = "LEFEVRE Kilian" },
@@ -78,6 +78,9 @@ markers = [
     "integration: tests requiring external APIs (MISTRAL_API_KEY) and local FAISS index",
     "ragas_ci: reduced RAGAS evaluation (4 questions) requiring MISTRAL_API_KEY, meant for CI/local smoke checks",
 ]
+
+[tool.coverage.run]
+source = ["src/api"]
 
 [tool.ruff]
 line-length = 99

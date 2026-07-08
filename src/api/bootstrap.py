@@ -41,6 +41,7 @@ def bootstrap() -> None:
         api_key=s.mistral_api_key,
         model=s.mistral_chat_model,
         temperature=s.mistral_temperature,
+        timeout=s.mistral_timeout_s,
     )
 
     _rag_use_case = AskQuestionUseCase(

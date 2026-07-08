@@ -39,10 +39,12 @@ format:
 test:
 	$(PYTHON_INTERPRETER) -m pytest tests
 
-## Run unit and API tests only (fast, no external dependencies)
+## Run unit and API tests only (fast, no external dependencies), with a coverage summary and an
+## HTML report at reports/coverage_html/index.html
 .PHONY: test-fast
 test-fast:
-	$(PYTHON_INTERPRETER) -m pytest tests/unit/ tests/api/ -v
+	$(PYTHON_INTERPRETER) -m pytest tests/unit/ tests/api/ -v --cov=src/api \
+		--cov-report=term-missing --cov-report=html:reports/coverage_html
 
 ## Run ALL tests (incl. integration/ragas_ci) with .env loaded into the test process — needs MISTRAL_API_KEY
 .PHONY: test-env

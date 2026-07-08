@@ -5,7 +5,7 @@ from api.modules.data.entities import Chunk, Event
 
 
 class EventFetcherPort(Protocol):
-    def fetch_events(self, where_clause: str, max_records: int = 10_000) -> list[dict]: ...
+    def fetch_events(self, where_clause: str, max_records: int = 1_000) -> list[dict]: ...
 
 
 class TextCleanerPort(Protocol):

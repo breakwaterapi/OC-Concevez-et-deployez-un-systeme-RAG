@@ -3,7 +3,7 @@
 First step is building the Faiss index in memory from a fixed, versioned dataset
 (tests/fixtures/documents.json — a copy of the 200-event test corpus' parent documents as plain
 JSON, no binary index committed to the repo; this 200-event set is itself already a reduced
-dataset — production can go up to OPENAGENDA_MAX_RECORDS=10000). Then runs 4 questions
+dataset — production can go up to OPENAGENDA_MAX_RECORDS=1000). Then runs 4 questions
 (data/evaluation/test_questions_ci.json, one of them about an event absent from the corpus) to
 keep the number of Mistral chat/judge calls low — the free tier has a strict requests-per-second
 limit and GitHub Actions has a limited run time (the one-off embedding pass to build the index is
