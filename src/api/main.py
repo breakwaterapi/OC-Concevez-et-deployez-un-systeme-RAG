@@ -42,7 +42,7 @@ app = FastAPI(
         "pas encore construit, appelez `POST /rebuild`. `GET /metadata` donne le détail du corpus "
         "actuellement indexé (région, période, tailles, modèles)."
     ),
-    version="0.9.0",
+    version="0.9.1",
     lifespan=lifespan,
     openapi_tags=[
         {
