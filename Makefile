@@ -34,6 +34,21 @@ format:
 	ruff check --fix
 	ruff format
 
+## Run all tests
+.PHONY: test
+test:
+	$(PYTHON_INTERPRETER) -m pytest tests
+
+## Run unit and API tests only (fast, no external dependencies)
+.PHONY: test-fast
+test-fast:
+	$(PYTHON_INTERPRETER) -m pytest tests/unit/ tests/api/ -v
+
+## Run ALL tests (incl. integration/ragas_ci) with .env loaded into the test process — needs MISTRAL_API_KEY
+.PHONY: test-env
+test-env:
+	@set -a && . ./.env && set +a && $(PYTHON_INTERPRETER) -m pytest tests -v
+
 ## Build the Faiss index (fetch + clean + chunk + embed), without starting the API
 .PHONY: build-index
 build-index:
