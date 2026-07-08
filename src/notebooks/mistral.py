@@ -45,3 +45,18 @@ class MistralEmbeddings(Embeddings):
                     time.sleep(delay)
                 else:
                     raise
+
+
+def mistral_chat(
+    messages: list[dict],
+    api_key: str,
+    model: str = "mistral-small-latest",
+    temperature: float = 0.3,
+) -> str:
+    client = Mistral(api_key=api_key)
+    resp = client.chat.complete(
+        model=model,
+        messages=messages,  # pyright: ignore[reportArgumentType]
+        temperature=temperature,
+    )
+    return str(resp.choices[0].message.content)
