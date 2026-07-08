@@ -1,0 +1,53 @@
+# Environnement
+.env
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Données (trop volumineuses pour git)
+data/raw/
+data/interim/
+data/processed/
+
+# Modèles
+models/
+
+# Index FAISS d'évaluation (binaire dérivé, reconstruit par le notebook 06 depuis
+# tests/fixtures/documents.json si absent — voir notebooks/config.py)
+data/evaluation/eval_faiss_index/
+
+# Ruff
+.ruff_cache/
+
+# Pytest
+.pytest_cache/
+.coverage
+
+# mkdocs build output
+site/
+
+# MLflow tracking local (notebook 06/07)
+notebooks/mlruns/
+notebooks/mlruns.db
+
+# Matériel de cours OpenClassrooms
+references/
