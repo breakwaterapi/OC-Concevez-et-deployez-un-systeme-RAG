@@ -14,7 +14,7 @@ cp .env.example .env
 
 Renseigner au minimum `MISTRAL_API_KEY` dans `.env`. `REBUILD_API_KEY` protège l'endpoint
 `POST /rebuild` — changez la valeur par défaut si vous exposez l'API au-delà de `localhost`.
-`OPENAGENDA_MAX_RECORDS` contrôle la taille du corpus indexé (1 000 par défaut, 10 000 maximum à cause de la limite d'offset de l'API OpenAgenda).
+`OPENAGENDA_MAX_RECORDS` contrôle la taille du corpus indexé (1 000 par défaut, également le maximum pratique pour ce filtre région + fenêtre temporelle à cause de la limite d'offset de l'API OpenAgenda).
 
 ## Lancer le projet
 

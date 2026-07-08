@@ -2,10 +2,10 @@
 
 Script pas-à-pas pour la soutenance : préparation, commandes à lancer, questions à poser en direct
 et comportement attendu pour chacune. Les 4 scénarios ci-dessous ont été vérifiés contre le corpus
-actuellement indexé (`models/faiss_index/`, 200 événements Île-de-France) — pas seulement
+actuellement indexé (`models/faiss_index/`, 1000 événements Île-de-France) — pas seulement
 imaginés, chaque réponse attendue cite un événement réel du jeu de données.
 
-## 1. Préparation (avant la salle)
+## 1. Préparation
 
 ```bash
 cp .env.example .env        # si pas déjà fait — renseigner MISTRAL_API_KEY et REBUILD_API_KEY

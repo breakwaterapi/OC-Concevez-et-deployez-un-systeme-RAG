@@ -118,7 +118,7 @@ class PrepareDataUseCase:
     fetcher: EventFetcherPort
     cleaner: TextCleanerPort
     where_clause: str
-    max_records: int = 10_000
+    max_records: int = 1_000
 
     def execute(self) -> list[Event]:
         raw = self.fetcher.fetch_events(self.where_clause, max_records=self.max_records)
