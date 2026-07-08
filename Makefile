@@ -54,6 +54,55 @@ test-env:
 build-index:
 	$(PYTHON_INTERPRETER) scripts/build_index.py
 
+## Build Docker images
+.PHONY: docker-build
+docker-build:
+	docker compose build
+
+## Start services in background (API on :8001, UI on :8502)
+.PHONY: docker-up
+docker-up:
+	docker compose up -d
+
+## Stop and remove containers
+.PHONY: docker-down
+docker-down:
+	docker compose down
+
+## Full startup: build images, seed the index if missing (progress bar shown live via a one-off
+## container running scripts/build_index.py — same code path as /rebuild, but not through the
+## API/HTTP), then start API + UI. The "one command" demo entry point. Only needs Docker on the
+## host, not uv/Python. Because seeding runs and completes before `api` starts, the freshly built
+## index (written to the shared ./models bind mount) is guaranteed to be picked up at API startup.
+.PHONY: up
+up:
+	docker compose build
+	@if [ ! -f models/faiss_index/index.faiss ]; then \
+		echo "No index found — building it now via a one-off container (real OpenAgenda + Mistral API calls, may take a few minutes, progress bar below)..."; \
+		docker compose run --rm api uv run python scripts/build_index.py; \
+	else \
+		echo "Index already present at models/faiss_index/ — skipping seed."; \
+	fi
+	docker compose up -d --wait
+
+## Force a rebuild against the already-running API (e.g. to refresh with new OpenAgenda events) —
+## distinct from initial seeding done by `make up`; the UI's "Reconstruire l'index" button does
+## the same thing over HTTP.
+.PHONY: rebuild
+rebuild:
+	@set -a && . ./.env && set +a && \
+	curl -sf -X POST http://localhost:8001/rebuild -H "X-API-Key: $$REBUILD_API_KEY" && echo
+
+## Full shutdown: stop and remove all containers
+.PHONY: down
+down:
+	docker compose down
+
+## Print .env as export statements — a bare `make env` can't touch your shell, run: eval "$(make env)"
+.PHONY: env
+env:
+	@grep -v '^#' .env | grep -v '^$$' | sed 's/^/export /'
+
 ## Set up Python interpreter environment
 .PHONY: create_environment
 create_environment:
