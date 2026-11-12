@@ -1,7 +1,7 @@
 import httpx
 import requests
 
-from mistralai.models import MistralError
+from mistralai.client.errors import MistralError
 
 
 def test_rebuild_returns_200(client, mock_data_use_cases):

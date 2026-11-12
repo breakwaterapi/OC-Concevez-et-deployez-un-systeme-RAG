@@ -1,7 +1,7 @@
 import time
 
 from langchain_core.embeddings import Embeddings
-from mistralai import Mistral
+from mistralai.client import Mistral
 
 MAX_RETRIES = 3
 RETRY_BASE_DELAY = 2

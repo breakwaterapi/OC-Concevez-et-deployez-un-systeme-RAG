@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 
 from loguru import logger
-from mistralai import Mistral
-from mistralai.utils import BackoffStrategy, RetryConfig
+from mistralai.client import Mistral
+from mistralai.client.utils import BackoffStrategy, RetryConfig
 from tqdm import tqdm
 
 # Native SDK retry: retries on 429/500/502/503/504, honors the Retry-After header when present,
