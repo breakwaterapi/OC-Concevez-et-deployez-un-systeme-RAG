@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
-from mistralai.models import MistralError
+from mistralai.client.errors import MistralError
 import requests
 
 from api.bootstrap import get_data_use_cases

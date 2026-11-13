@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from mistralai import Mistral
+from mistralai.client import Mistral
 
 from api.modules.health.ports import ModelCheckerPort
 
